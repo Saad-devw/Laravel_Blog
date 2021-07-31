@@ -12,7 +12,8 @@
           <div class="col-sm-8 col-md-8">
               <div>
                   <h3>{{ $post -> title }}</h3>
-                  <small>Created at: {{ $post -> created_at }} by {{$post->user->name}} </small>
+                  <p class="py-2 text-muted" id="post-body"><?php echo substr($post->body,0, 400) ?> <i class="fa fa-chevron-right bg-secondary text-white px-2 py-1 mx-2 rounded-circle"></i></p>
+                  <small class="text-right">Created at: {{ $post -> created_at }} by {{$post->user->name}} </small>
               </div>
           </div>
         </div>
