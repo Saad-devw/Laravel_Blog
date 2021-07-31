@@ -2,12 +2,12 @@
 Small Blog Application using Laravel 8
 ###
 # Requirements
-1. XAMPP:
-    put source code inside htdocs folder in xmapp directory
-2. PHP.
-3. COMPOSER:
+    1. XAMPP:
+    put source code inside htdocs folder in xampp directory | Or you can use Production server (# Run App)
+    2. PHP.
+    3. COMPOSER:
     you can install them from their official website
-4. Import database inside 'MySQL_Database' Folder with the same name 'lrblog' in 'phpmyadmin'
+    4. Import database inside 'MySQL_Database' Folder with the same name 'lrblog' in 'phpmyadmin'
 ###
 # Run App:
     you can run the app in two ways :
