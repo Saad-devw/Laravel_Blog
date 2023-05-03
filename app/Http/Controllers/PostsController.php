@@ -68,22 +68,21 @@ class PostsController extends Controller
     {
         $this->validate($request, [
             'title' => 'Required',
-            'body' => 'Required',
-            'cover_image' => 'image|nullable|max:1999'
+            'file' => 'file|nullable|max:100000'
         ]);
 
-        if($request->hasFile('cover-image'))
+        if($request->hasFile('file'))
         {
             //get file name
-            $fileNameWithExt = $request->file('cover-image')->getClientOriginalName();
+            $fileNameWithExt = $request->file('file')->getClientOriginalName();
             //get just file name*
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             //get extention
-            $fileNameExtension = $request->file('cover-image')->getClientOriginalExtension();
+            $fileNameExtension = $request->file('file')->getClientOriginalExtension();
             //get file to store
             $fileToStore = $fileName. time() .'.'. $fileNameExtension;
             //upload image
-            $path = $request->file('cover-image')->storeAs('public/coverImages', $fileToStore);
+            $path = $request->file('file')->storeAs('public/files', $fileToStore);
         }
         else{
             $fileToStore = 'noImage.jpg';
@@ -92,12 +91,12 @@ class PostsController extends Controller
         //Create post
         $post = new Post;
         $post -> title = $request->input('title');
-        $post -> body = $request->input('body');
+        $post -> body ='';
         $post->user_id = auth()->user()->id;
-        $post -> cover_image =  $fileToStore;
+        $post -> file =  $fileToStore;
         $post -> save();
 
-        return redirect('/posts')->with('success', 'Post Created Successfully');
+        return redirect('/posts')->with('success', 'Fichier Créer avec Succès');
     }
 
     
@@ -127,7 +126,7 @@ class PostsController extends Controller
             return view('posts.edit')->with('post', $post);
         }
         else{
-            return redirect('/posts')->with('error', "you don't have permission to access this page!");
+            return redirect('/posts')->with('error', "Vous n'avez pas L'authorisation d'accédez a cette page!");
         }
     }
 
@@ -142,34 +141,33 @@ class PostsController extends Controller
     {
         $this->validate($request, [
             'title' => 'Required',
-            'body' => 'Required'
         ]);
 
-        if($request->hasFile('cover-image'))
+        if($request->hasFile('file'))
         {
             //get file name
-            $fileNameWithExt = $request->file('cover-image')->getClientOriginalName();
+            $fileNameWithExt = $request->file('file')->getClientOriginalName();
             //get just file name*
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             //get extention
-            $fileNameExtension = $request->file('cover-image')->getClientOriginalExtension();
+            $fileNameExtension = $request->file('file')->getClientOriginalExtension();
             //get file to store
             $fileToStore = $fileName. time() .'.'. $fileNameExtension;
             //upload image
-            $path = $request->file('cover-image')->storeAs('public/coverImages', $fileToStore);
+            $path = $request->file('file')->storeAs('public/files', $fileToStore);
         }
 
         //Create post
         $post = Post::find($id);
         $post -> title = $request->input('title');
-        $post -> body = $request->input('body');
-        if($request->hasFile('cover-image'))
+        $post -> body = '';
+        if($request->hasFile('file'))
         {
-            $post -> cover_image = $fileToStore;
+            $post -> file = $fileToStore;
         }
         $post -> save();
 
-        return redirect('/posts')->with('success', 'Post Updated Successfully');
+        return redirect('/posts')->with('success', 'Fichier Modifié avec Succès');
     }
 
     /**
@@ -182,13 +180,13 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         if(auth()->user()->id !== $post -> user_id){
-            return redirect('/posts')->with('error', "you don't have permission to access this page!");
+            return redirect('/posts')->with('error', "Vous n'avez pas L'authorisation d'accédez a cette page!");
         }
           
         $post->delete();
         if($post -> cover_image != 'noimage.jpg'){
-            Storage::delete('public/storage/coverImages/'.$post->cover_image);
+            Storage::delete('public/storage/files/'.$post->cover_image);
         }
-        return redirect('/posts')->with('success', 'Post Deleted Successfully');
+        return redirect('/posts')->with('success', 'Fichier Supprimé avec succès');
     }
 }

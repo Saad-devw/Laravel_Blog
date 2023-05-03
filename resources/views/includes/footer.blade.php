@@ -1,4 +1,4 @@
-<div class="mt-5">
+{{-- <div class="mt-5 w-100">
     <!-- Footer -->
     <footer class=" text-lg-start text-white" style="background-color: #929fba">
         <!-- Grid container -->
@@ -100,4 +100,4 @@
         <!-- Copyright -->
     </footer>
     <!-- Footer -->
-</div>
+</div> --}}

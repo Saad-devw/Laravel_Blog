@@ -3,7 +3,7 @@
       <a href="/posts" class="btn btn-secondary my-4"> Back </a>
       <h3> {{$post->title}} </h3>
       <div class="col-md-12 text-center my-3">
-        <img src="/storage/coverImages/{{ $post -> cover_image }}" alt="{{$post->title}}" class="img-fluid" width="70%">
+        <img src="/storage/files/{{ $post -> file }}" alt="{{$post->title}}" class="img-fluid" width="70%">
       </div>
       <div class="col-md-12">
         <p id="post-body" class="text-muted" style="width:100%;"> {!! $post -> body !!} </p>
