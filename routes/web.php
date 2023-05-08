@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::get('/services', '\App\Http\Controllers\PagesController@services');
 
 // Crete post table routes
 Route::resource('posts', '\App\Http\Controllers\PostsController');
+Route::get('/posts/search', [PostsController::class, 'search'])->name('posts.search');
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
