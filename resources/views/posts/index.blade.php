@@ -3,9 +3,9 @@
     <h3 class="my-4">Tout Les Fichiers :</h3>
     <?php $count = 0; ?>
     @if (count($posts) > 0)
-    <div class="row justify-content-center py-3 px-2 my-3">
+    <div class="row justify-content-center py-3 px-2 my-3 files">
       @foreach ($posts as $post)
-      <a href="posts/ {{ $post->id }}" class="col-sm-3 m-2 border shadow-sm">
+      <a href="/storage/files/{{$post->file}}" download="{{$post->file}}" class="col-sm-3 m-2 border shadow-sm">
           <div class="col-sm-12">
               <img src="./assets/images/download.jpg" alt="{{$post-> title}}" width="100%">
           </div>

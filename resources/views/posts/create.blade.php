@@ -10,7 +10,7 @@
         {{ Form::label('body', 'Body') }}
         {{ Form::textarea('body', '', ['id' => 'editor1', 'class' => 'form-control', 'placeholder' => 'Enter post body']) }}
       </div> --}}
-      <div class="form-control">
+      <div class="form-control my-2">
         {{ Form::file('file') }}
       </div>
       {{ Form:: submit('Submit', ['class' => 'btn btn-primary']) }}

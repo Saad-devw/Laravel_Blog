@@ -43,7 +43,7 @@ class PostsController extends Controller
          * $posts = Post::orderBy('title')-> take()-> get();  
          */  
 
-        $posts = Post::orderBy('created_at', 'desc')-> paginate(8);
+        $posts = Post::orderBy('created_at', 'desc')-> paginate(9);
         //$posts = Post::all();
         return view('posts.index')->with('posts', $posts);
     }

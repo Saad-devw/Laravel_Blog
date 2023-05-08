@@ -14,41 +14,38 @@
           </ul>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="/">Home</a>
+                <a class="nav-link " aria-current="page" href="/">Accueil</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/services" >Services</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/posts" >Blog</a>
+                <a class="nav-link" href="/posts" >Fichiers</a>
               </li>
           </ul>
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ml-auto">
               <!-- Authentication Links -->
               @guest
-                  @if (Route::has('login'))
+                  @if (Route::has('login') && !Auth::check())
                       <li class="nav-item">
                           <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                       </li>
                   @endif
 
-                  @if (Route::has('register'))
+                  @if (Route::has('register') && !Auth::check())
                       <li class="nav-item">
                           <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                       </li>
                   @endif
               @else
-                  <li>
-                    <a class="nav-link" href="/posts/create">Create Post</a>
-                  </li>
+                  
                   <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
+
+                        
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}"
@@ -58,6 +55,9 @@
                             </a>
 
                             <a href="/dashboard" class="dropdown-item">Dashboard</a>
+                            @if(Auth::user()->role == 'superAdmin')
+                                <a class="dropdown-item text-primary" href="/posts/create">Create Post</a>
+                            @endif
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
