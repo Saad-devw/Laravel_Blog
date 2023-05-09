@@ -192,46 +192,11 @@ class PostsController extends Controller
 
     public function search(Request $request){
         if($request->ajax()){
-            $query = $request->get('query');
-            if($query != ''){
-                $data = DB::table('posts')
-                        ->where('title', 'like', '%'.$query.'%')
-                        ->orderBy('id','asc')->get();
-            }
-            else{
-                $data = DB::table('posts')->orderBy('id','asc')->get();
-            }
+            $output = '
+                <h1>test passed</h1>
+            ';
 
-            $total_row = $data->count();
-            $output='';
-            if($total_row > 0){
-                foreach($data as $row){
-                    $output .= '
-                        <a href="/storage/files/'. $row->file . '" download="'. $row->file . '" class="col-sm-3 m-2 border shadow-sm">
-                            <div class="col-sm-12">
-                                <img src="./assets/images/download.jpg" alt="'.$row-> title.'" width="100%">
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="text-center">
-                                    <h3>'.$row -> title .'</h3>
-                                    <small class="text-right">Créé Le: '. $row -> created_at .' Par '. $row->user->name .' </small>
-                                </div>
-                            </div>
-                        </a>
-                    ';
-                }
-            } else{
-                $output = '
-                    <tr></tr>
-                    <tr>
-                        <td align="center" colspan="6"> 
-                            <div class="container empty-box" >
-                                <h3 class="text-center me-3">Aucune résultat</h3>
-                            </div>
-                        </td>
-                    </tr>
-                ';
-            }
+            $total_row = 5;
 
             $data = array(
                 'table_data'   =>    $output,

@@ -37,12 +37,22 @@
     @endif
     <script>
       $(document).ready(function(){
+              
           fetch_factures_data();
           function fetch_factures_data(query = ''){
+              
+              $.ajaxSetup({
+                  headers:{
+                      'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                  }
+              });
+
               $.ajax({
                   url:"{{ route('posts.search') }}",
                   method:'GET',
-                  data:{query:query},
+                  data:{
+                    query:query
+                  },
                   dataType:'json',
                   success:function(data){
                       $('#files').html(data.table_data);
