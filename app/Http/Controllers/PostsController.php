@@ -191,19 +191,20 @@ class PostsController extends Controller
     }
 
     public function search(Request $request){
-        if($request->ajax()){
-            $output = '
-                <h1>test passed</h1>
-            ';
+        echo "connect successful";
+        // if($request->ajax()){
+        //     $output = '
+        //         <h1>test passed</h1>
+        //     ';
 
-            $total_row = 5;
+        //     $total_row = 5;
 
-            $data = array(
-                'table_data'   =>    $output,
-                'total_data'   =>    $total_row
-            );
+        //     $data = array(
+        //         'table_data'   =>    $output,
+        //         'total_data'   =>    $total_row
+        //     );
 
-            echo json_encode($data);
-        }
+        //     echo json_encode($data);
+        // }
     }
 }

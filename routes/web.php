@@ -24,13 +24,12 @@ Route::get('/about', '\App\Http\Controllers\PagesController@about');
 Route::get('/services', '\App\Http\Controllers\PagesController@services');
 
 // Crete post table routes
-Route::resource('posts', '\App\Http\Controllers\PostsController');
 route::get('posts', [PostsController::class, 'index'])->name('posts.index');
 route::post('posts', [PostsController::class, 'create'])->name('posts.create');
 route::get('posts/{id}', [PostsController::class, 'show'])->name('posts.show');
 route::put('posts/{id}', [PostsController::class, 'update'])->name('posts.update');
 route::delete('posts/{id}', [PostsController::class, 'destroy'])->name('posts.destroy');
-route::get('/posts/search', [PostsController::class, 'search'])->name('posts.search');
+Route::post('search', '\App\Http\Controllers\PostsController@search');
 
 
 
